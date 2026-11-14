@@ -1,0 +1,14 @@
+GLOBAL SOLUTION 2026.2 - Cross-Platform Application Development
+Projeto: Meu ônibus está chegando (mobile)
+
+Integrantes
+- Bryan   - RM568081
+- Julia   - RM568438
+- Roberto - RM567348
+
+Divisão do trabalho
+(a preencher com o que cada integrante fez de fato)
+
+- Roberto: ...
+- Bryan: ...
+- Julia: ...
