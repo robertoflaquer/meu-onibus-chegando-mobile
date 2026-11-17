@@ -2,13 +2,13 @@ GLOBAL SOLUTION 2026.2 - Cross-Platform Application Development
 Projeto: Meu ônibus está chegando (mobile)
 
 Integrantes
-- Bryan   - RM568081
-- Julia   - RM568438
-- Roberto - RM567348
+- Bryan de Almeida - RM568081
+- Julia Yamazaki   - RM568438
+- Roberto Flaquer  - RM567348
 
 Divisão do trabalho
-(a preencher com o que cada integrante fez de fato)
-
-- Roberto: ...
-- Bryan: ...
-- Julia: ...
+- Roberto Flaquer: desenvolvimento do aplicativo em React Native/Expo (GPS,
+  busca, painel da linha, mapa, notificações locais, vibração e tratamento
+  de permissões) e narração do vídeo de demonstração.
+- Bryan de Almeida: roteiro e gravação do vídeo de demonstração.
+- Julia Yamazaki: testes do aplicativo no celular (GPS, avisos e permissões).

@@ -4,6 +4,8 @@ Aplicativo mobile em React Native (Expo) que usa o **GPS do celular** e a **API 
 
 Projeto da Global Solution 2026.2, disciplina Cross-Platform Application Development (FIAP). Tema do desafio: Citizen Intelligence & Predictive Analytics, monitoramento da cidade para melhorar a qualidade de vida do cidadão.
 
+**Vídeo de demonstração (celular real):** https://youtube.com/shorts/pFxn82x84cE
+
 ## O que o app faz
 
 **1. Encontrar a linha**
