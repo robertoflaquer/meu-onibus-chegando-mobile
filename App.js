@@ -1,12 +1,9 @@
-// Meu ônibus está chegando (mobile)
-// Ponto de entrada: carrega as fontes, mostra o topo e alterna entre a busca e o painel da linha.
-
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { useFonts } from "expo-font";
-// Importa so os pesos usados (importar do pacote inteiro levaria todas as variacoes para o app).
+// so os pesos usados (o pacote inteiro deixa o app pesado)
 import { AtkinsonHyperlegible_400Regular } from "@expo-google-fonts/atkinson-hyperlegible/400Regular";
 import { AtkinsonHyperlegible_700Bold } from "@expo-google-fonts/atkinson-hyperlegible/700Bold";
 import { BarlowCondensed_700Bold } from "@expo-google-fonts/barlow-condensed/700Bold";
@@ -43,7 +40,7 @@ export default function App() {
         </View>
 
         <View style={estilos.corpo}>
-          {/* A busca continua montada (escondida) para manter os resultados ao voltar do painel. */}
+          {/* mantem a busca montada pra nao perder o resultado */}
           <View style={[estilos.corpo, selecao && estilos.oculto]}>
             <TelaBusca aoEscolherLinha={(linha, referencia) => setSelecao({ linha, referencia })} />
           </View>

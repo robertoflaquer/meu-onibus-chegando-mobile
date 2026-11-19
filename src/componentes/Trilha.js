@@ -1,5 +1,3 @@
-// Trilha visual da distancia: o onibus anda da esquerda (2 km ou mais) ate "voce" (direita).
-
 import { useEffect, useRef, useState } from "react";
 import { Animated, StyleSheet, Text, View } from "react-native";
 import { IconeOnibus } from "./ui";

@@ -1,9 +1,4 @@
-// Configuracao do app.
-//
-// O app nao fala direto com a SPTrans: usa as mesmas funcoes serverless da versao web,
-// publicadas no Vercel. Assim o token da API Olho Vivo nunca fica dentro do app nem no GitHub.
-// Para apontar para outro servidor, crie um arquivo .env com EXPO_PUBLIC_API_URL=https://...
-
+// o app usa as funcoes do Vercel da versao web, assim o token nao fica no app
 export const API_URL = process.env.EXPO_PUBLIC_API_URL ?? "https://meu-onibus-chegando-web.vercel.app";
 
 export const INTERVALO_ATUALIZACAO_MS = 20000;

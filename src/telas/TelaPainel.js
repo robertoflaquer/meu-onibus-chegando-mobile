@@ -1,9 +1,3 @@
-// Painel de uma linha: onibus em tempo real, distancia ate o usuario, previsao no ponto e avisos.
-//
-// GPS: se o usuario usou a localizacao, o app acompanha a posicao enquanto ele se desloca.
-// Avisos: por distancia (onibus se aproximando) e, quando a SPTrans informa os pontos,
-// por minutos ate a chegada. Vibram e geram notificacao local (ou alerta, sem permissao).
-
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ActivityIndicator, Animated, AppState, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import * as api from "../servicos/api";
@@ -61,7 +55,7 @@ export function TelaPainel({ linha, referenciaInicial, aoVoltar }) {
   const jaAvisados = useRef(new Set());
   const pontoAutomaticoFeito = useRef(false);
 
-  // A atualizacao periodica le sempre os valores mais recentes por esta referencia.
+  // ref pro intervalo ler o estado atual
   const atual = useRef({});
   atual.current = { referencia, ponto, limiteM, limiteMin, notificacoes };
 
@@ -100,7 +94,7 @@ export function TelaPainel({ linha, referenciaInicial, aoVoltar }) {
     }
   }, [linha]);
 
-  // Atualiza a cada 20 s; pausa com o app em segundo plano para poupar bateria e dados.
+  // atualiza a cada 20 s e pausa em segundo plano
   useEffect(() => {
     let intervalo = null;
     const iniciar = () => {
@@ -122,12 +116,11 @@ export function TelaPainel({ linha, referenciaInicial, aoVoltar }) {
     };
   }, [atualizar]);
 
-  // Trocar de ponto atualiza na hora.
   useEffect(() => {
     if (ponto) atualizar();
   }, [ponto, atualizar]);
 
-  // Pontos da linha (muitas linhas nao tem pontos cadastrados na API).
+  // muitas linhas vem sem pontos da API
   useEffect(() => {
     let ativo = true;
     api
@@ -139,7 +132,7 @@ export function TelaPainel({ linha, referenciaInicial, aoVoltar }) {
     };
   }, [linha.cl]);
 
-  // Escolhe sozinho o ponto mais proximo, uma vez, se o usuario estiver perto dele.
+  // escolhe o ponto mais perto (ate 800 m) uma vez
   useEffect(() => {
     if (pontoAutomaticoFeito.current || !pontos?.length || !referencia) return;
     pontoAutomaticoFeito.current = true;
@@ -147,7 +140,7 @@ export function TelaPainel({ linha, referenciaInicial, aoVoltar }) {
     if (maisPerto.distancia <= RAIO_PONTO_AUTOMATICO_M) setPonto(maisPerto);
   }, [pontos, referencia]);
 
-  // GPS continuo enquanto o painel esta aberto (so quando a referencia e o proprio usuario).
+  // GPS continuo so quando a referencia e o usuario
   const seguindoGps = referencia?.rotulo === ROTULO_USUARIO;
   useEffect(() => {
     if (!seguindoGps) return undefined;
@@ -162,7 +155,7 @@ export function TelaPainel({ linha, referenciaInicial, aoVoltar }) {
     };
   }, [seguindoGps]);
 
-  // Pede permissao de notificacao ao abrir o painel: o aviso ja vem ligado (500 m).
+  // pede notificacao ao abrir (o aviso ja vem em 500 m)
   const verificarNotificacoes = useCallback(async () => {
     try {
       setNotificacoes(await garantirPermissaoNotificacao());
@@ -205,7 +198,6 @@ export function TelaPainel({ linha, referenciaInicial, aoVoltar }) {
         <Text style={estilos.voltarTexto}>‹  Trocar de linha</Text>
       </Pressable>
 
-      {/* Letreiro */}
       <View style={estilos.letreiro} accessibilityRole="header" accessibilityLabel={`Linha ${linha.letreiro}, sentido ${linha.destino}`}>
         <View style={estilos.letreiroNumero}>
           <Placa texto={linha.letreiro} grande />
@@ -216,14 +208,12 @@ export function TelaPainel({ linha, referenciaInicial, aoVoltar }) {
         </View>
       </View>
 
-      {/* Aviso disparado */}
       {faixaAviso ? (
         <Pressable onPress={() => setFaixaAviso(null)} style={estilos.faixaAviso} accessibilityRole="alert" accessibilityHint="Toque para fechar">
           <Text style={estilos.faixaAvisoTexto}>🔔  {faixaAviso}</Text>
         </Pressable>
       ) : null}
 
-      {/* Destaque: distancia */}
       <Cartao>
         <Destaque
           situacao={situacao}
@@ -235,7 +225,6 @@ export function TelaPainel({ linha, referenciaInicial, aoVoltar }) {
         />
       </Cartao>
 
-      {/* Alarme */}
       <Cartao style={estilos.alarme}>
         <Text style={estilos.alarmeTitulo}>🔔  Me avise quando o ônibus estiver a</Text>
         <SeletorOpcoes opcoes={OPCOES_DISTANCIA} valor={limiteM} aoMudar={(v) => mudarAviso(setLimiteM, v)} rotulo="Distância para avisar" />
@@ -256,12 +245,10 @@ export function TelaPainel({ linha, referenciaInicial, aoVoltar }) {
         ) : null}
       </Cartao>
 
-      {/* Mapa */}
       <Cartao style={estilos.cartaoMapa}>
         <MapaLinha referencia={referencia} veiculos={veiculos} pontos={pontos ?? []} pontoEscolhido={ponto} />
       </Cartao>
 
-      {/* Previsao no ponto */}
       <Cartao>
         <TituloCartao>Previsão no seu ponto</TituloCartao>
         {pontos === null ? <Mensagem>Carregando os pontos desta linha...</Mensagem> : null}
@@ -321,7 +308,6 @@ export function TelaPainel({ linha, referenciaInicial, aoVoltar }) {
         ) : null}
       </Cartao>
 
-      {/* Onibus mais proximos */}
       <Cartao>
         <TituloCartao>Ônibus mais próximos</TituloCartao>
         {veiculos.length ? (

@@ -1,8 +1,3 @@
-// Tela de busca: tres formas de chegar a uma linha.
-//   1. Perto de mim (acao principal): GPS -> linhas com onibus passando perto agora.
-//   2. Endereco: texto -> coordenadas -> linhas com onibus passando perto.
-//   3. Numero ou destino: linhas agrupadas, com um botao por sentido.
-
 import { useState } from "react";
 import { Keyboard, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import * as api from "../servicos/api";
@@ -42,8 +37,6 @@ export function TelaBusca({ aoEscolherLinha }) {
     mostrarResultado(null, [], textoMensagem);
   }
 
-  // ---------- 1. Perto de mim ----------
-
   async function usarMinhaLocalizacao() {
     Keyboard.dismiss();
     setCarregando("gps");
@@ -82,8 +75,6 @@ export function TelaBusca({ aoEscolherLinha }) {
       limpar(ERRO_REDE);
     }
   }
-
-  // ---------- 2 e 3. Busca por texto ----------
 
   async function buscar() {
     const termo = texto[modo].trim();
@@ -225,8 +216,6 @@ export function TelaBusca({ aoEscolherLinha }) {
     </ScrollView>
   );
 }
-
-// ---------- Itens de resultado ----------
 
 function ItemPerto({ dados, aoTocar }) {
   const linha = linhaDaPosicao(dados);

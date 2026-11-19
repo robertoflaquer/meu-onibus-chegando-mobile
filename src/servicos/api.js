@@ -1,8 +1,3 @@
-// Acesso aos dados pelas funcoes serverless publicadas no Vercel (ver src/config.js).
-//   /api/olhovivo -> consultas de leitura da API Olho Vivo (SPTrans)
-//   /api/perto    -> linhas com onibus perto de uma coordenada
-//   /api/endereco -> endereco para coordenadas (Nominatim, OpenStreetMap)
-
 import { API_URL, TEMPO_LIMITE_REDE_MS } from "../config";
 
 function montarConsulta(parametros) {
@@ -33,8 +28,6 @@ export const posicaoDaLinha = (codigoLinha) => olhoVivo("/Posicao/Linha", { codi
 
 export const previsao = (codigoParada, codigoLinha) => olhoVivo("/Previsao", { codigoParada, codigoLinha });
 
-/** Linhas com onibus a ate `raio` metros do local. */
 export const linhasPerto = ({ lat, lon }, raio) => obterJson("/api/perto", { lat, lon, raio });
 
-/** Ate 5 lugares em Sao Paulo que correspondem ao texto digitado. */
 export const buscarEndereco = (texto) => obterJson("/api/endereco", { q: texto });

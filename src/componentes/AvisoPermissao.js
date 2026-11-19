@@ -1,6 +1,3 @@
-// Cartao mostrado quando o usuario nao permitiu o GPS ou as notificacoes.
-// Explica o que o app perde e oferece o caminho certo: pedir de novo ou abrir os Ajustes.
-
 import { StyleSheet, Text, View } from "react-native";
 import { Botao } from "./ui";
 import { abrirAjustes } from "../servicos/localizacao";

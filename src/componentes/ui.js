@@ -1,9 +1,6 @@
-// Componentes visuais basicos, reaproveitados pelas telas.
-
 import { ActivityIndicator, Pressable, StyleSheet, Text, View } from "react-native";
 import { cores, fontes, sombra } from "../tema";
 
-/** Placa da linha, no estilo do letreiro do onibus (ex.: "875A-10"). */
 export function Placa({ texto, grande = false }) {
   return (
     <View style={[estilos.placa, grande && estilos.placaGrande]}>
@@ -82,7 +79,6 @@ export function SeloAcessivel() {
   );
 }
 
-/** Desenho simples de onibus (sem biblioteca de icones). */
 export function IconeOnibus({ tamanho = 32, corpo = cores.tinta, vidro = cores.ambar }) {
   const u = tamanho / 32;
   return (
@@ -95,7 +91,6 @@ export function IconeOnibus({ tamanho = 32, corpo = cores.tinta, vidro = cores.a
   );
 }
 
-/** Grupo de opcoes em pilulas (substitui o <select> da web). */
 export function SeletorOpcoes({ opcoes, valor, aoMudar, rotulo }) {
   return (
     <View style={estilos.opcoes} accessibilityRole="radiogroup" accessibilityLabel={rotulo}>

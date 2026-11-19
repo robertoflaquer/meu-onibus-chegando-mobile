@@ -1,7 +1,3 @@
-// Identidade visual: sinalizacao de onibus de Sao Paulo.
-// Placa escura com texto ambar (o "letreiro"), letra condensada de sinalizacao
-// e corpo em Atkinson Hyperlegible, fonte criada para pessoas com baixa visao.
-
 export const cores = {
   fundo: "#f2f0eb",
   cartao: "#ffffff",

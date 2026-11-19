@@ -1,13 +1,7 @@
-// Regras do acompanhamento de uma linha (funcoes puras, sem tela nem rede).
-
 import { distanciaM, minutosAte } from "./util";
 
 const MARGEM_MOVIMENTO_M = 20; // diferencas menores podem ser so imprecisao do GPS
 
-/**
- * Calcula a distancia de cada onibus ate a referencia e se ele esta se aproximando.
- * `movimento` (Map prefixo -> { distancia, status }) guarda a leitura anterior entre chamadas.
- */
 export function medirVeiculos(lista, referencia, movimento) {
   if (!referencia) return lista.map((v) => ({ ...v, distancia: null, status: null }));
 
@@ -28,7 +22,6 @@ export function medirVeiculos(lista, referencia, movimento) {
     .sort((a, b) => a.distancia - b.distancia);
 }
 
-/** Previsoes de chegada no ponto, em minutos, da mais proxima para a mais distante. */
 export function lerChegadas(previsao) {
   if (!previsao) return [];
   return (previsao.p?.l ?? [])
@@ -37,12 +30,10 @@ export function lerChegadas(previsao) {
     .sort((a, b) => a.minutos - b.minutos);
 }
 
-/** Onibus em destaque: o primeiro que vem na direcao do usuario; senao, o mais proximo. */
 export function onibusEmDestaque(veiculos) {
   return veiculos.find((v) => v.status === "aproximando") ?? veiculos[0] ?? null;
 }
 
-/** Pontos da linha ordenados pela distancia ate a referencia (quando houver). */
 export function ordenarPontos(pontos, referencia) {
   const comDistancia = pontos.map((p) => ({
     ...p,
@@ -52,12 +43,6 @@ export function ordenarPontos(pontos, referencia) {
   return comDistancia;
 }
 
-/**
- * Decide quais avisos disparar agora. Cada onibus avisa uma vez por tipo:
- * as chaves ja usadas ficam em `jaAvisados`.
- *   - por distancia: onibus se aproximando e a ate `limiteM` metros
- *   - por tempo: chegada ao ponto em ate `limiteMin` minutos
- */
 export function avisosPendentes({ veiculos, chegadas, limiteM, limiteMin, jaAvisados }) {
   const pendentes = [];
 

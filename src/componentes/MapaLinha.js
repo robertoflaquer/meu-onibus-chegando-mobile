@@ -1,6 +1,3 @@
-// Mapa da linha com react-native-maps (Apple Maps no iPhone, incluido no Expo Go).
-// Mostra o usuario, os onibus da linha (verde = acessivel) e os pontos, quando existem.
-
 import { useEffect, useRef } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
@@ -27,7 +24,7 @@ export function MapaLinha({ referencia, veiculos, pontos, pontoEscolhido }) {
   const mapa = useRef(null);
   const enquadrado = useRef(false);
 
-  // Enquadra uma vez, quando chegam os primeiros onibus: usuario + 3 onibus mais proximos (+ ponto).
+  // enquadra so na primeira leitura
   useEffect(() => {
     if (enquadrado.current || !mapa.current || !veiculos.length) return;
     const coordenadas = veiculos.slice(0, 3).map((v) => ({ latitude: v.py, longitude: v.px }));
